@@ -10,6 +10,7 @@ class UnserializationException extends \RuntimeException implements Exception
      * @param string $context
      * @param mixed $value
      * @param string $expectedType
+     *
      * @return UnserializationException
      */
     public static function invalidValue($context, $value, $expectedType)
@@ -29,6 +30,7 @@ class UnserializationException extends \RuntimeException implements Exception
      * @param string $property
      * @param mixed $value
      * @param string $expectedType
+     *
      * @return UnserializationException
      */
     public static function invalidProperty($context, $property, $value, $expectedType)
@@ -48,6 +50,7 @@ class UnserializationException extends \RuntimeException implements Exception
      * @param string $context
      * @param string $property
      * @param string $expectedType
+     *
      * @return UnserializationException
      */
     public static function missingProperty($context, $property, $expectedType)
@@ -65,6 +68,7 @@ class UnserializationException extends \RuntimeException implements Exception
      *
      * @param string $context
      * @param string $value
+     *
      * @return UnserializationException
      */
     public static function unsupportedType($context, $value)

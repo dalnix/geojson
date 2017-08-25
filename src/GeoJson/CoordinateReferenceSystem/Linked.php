@@ -22,10 +22,10 @@ class Linked extends CoordinateReferenceSystem
      */
     public function __construct($href, $type = null)
     {
-        $this->properties = array('href' => (string) $href);
+        $this->properties = array('href' => (string)$href);
 
         if (isset($type)) {
-            $this->properties['type'] = (string) $type;
+            $this->properties['type'] = (string)$type;
         }
     }
 
@@ -33,14 +33,17 @@ class Linked extends CoordinateReferenceSystem
      * Factory method for creating a Linked CRS object from properties.
      *
      * @see CoordinateReferenceSystem::jsonUnserialize()
+     *
      * @param array|object $properties
+     *
      * @return Linked
      * @throws UnserializationException
      */
     protected static function jsonUnserializeFromProperties($properties)
     {
         if ( ! is_array($properties) && ! is_object($properties)) {
-            throw UnserializationException::invalidProperty('Linked CRS', 'properties', $properties, 'array or object');
+            throw UnserializationException::invalidProperty('Linked CRS', 'properties', $properties,
+                'array or object');
         }
 
         $properties = new \ArrayObject($properties);
@@ -49,8 +52,8 @@ class Linked extends CoordinateReferenceSystem
             throw UnserializationException::missingProperty('Linked CRS', 'properties.href', 'string');
         }
 
-        $href = (string) $properties['href'];
-        $type = isset($properties['type']) ? (string) $properties['type'] : null;
+        $href = (string)$properties['href'];
+        $type = isset($properties['type']) ? (string)$properties['type'] : null;
 
         return new self($href, $type);
     }

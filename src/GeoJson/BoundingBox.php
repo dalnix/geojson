@@ -70,11 +70,10 @@ class BoundingBox implements \JsonSerializable, JsonUnserializable
     /**
      * @see JsonUnserializable::jsonUnserialize()
      */
-    final public static function jsonUnserialize($json)
+    final public static function jsonUnserialize(string $json)
     {
-        if ( ! is_array($json)) {
-            throw UnserializationException::invalidValue('BoundingBox', $json, 'array');
-        }
+        $json = json_decode($json);
+
 
         return new self($json);
     }

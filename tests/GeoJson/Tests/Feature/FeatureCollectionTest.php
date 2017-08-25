@@ -78,17 +78,17 @@ class FeatureCollectionTest extends BaseGeoJsonTest
         );
 
         $features[0]->expects($this->any())
-            ->method('jsonSerialize')
-            ->will($this->returnValue('feature1'));
+                    ->method('jsonSerialize')
+                    ->will($this->returnValue('feature1'));
 
         $features[1]->expects($this->any())
-            ->method('jsonSerialize')
-            ->will($this->returnValue('feature2'));
+                    ->method('jsonSerialize')
+                    ->will($this->returnValue('feature2'));
 
         $collection = new FeatureCollection($features);
 
         $expected = array(
-            'type' => 'FeatureCollection',
+            'type'     => 'FeatureCollection',
             'features' => array('feature1', 'feature2'),
         );
 
@@ -119,7 +119,7 @@ class FeatureCollectionTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json = json_decode($json, $assoc);
+        $json       = json_decode($json, $assoc);
         $collection = GeoJson::jsonUnserialize($json);
 
         $this->assertInstanceOf('GeoJson\Feature\FeatureCollection', $collection);
@@ -127,7 +127,7 @@ JSON;
         $this->assertCount(1, $collection);
 
         $features = iterator_to_array($collection);
-        $feature = $features[0];
+        $feature  = $features[0];
 
         $this->assertInstanceOf('GeoJson\Feature\Feature', $feature);
         $this->assertSame('Feature', $feature->getType());
@@ -144,7 +144,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true' => array(true),
+            'assoc=true'  => array(true),
             'assoc=false' => array(false),
         );
     }

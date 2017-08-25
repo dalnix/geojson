@@ -23,7 +23,7 @@ class MultiPoint extends Geometry
     public function __construct(array $positions)
     {
         $this->coordinates = array_map(
-            function($point) {
+            function ($point) {
                 if ( ! $point instanceof Point) {
                     $point = new Point($point);
                 }

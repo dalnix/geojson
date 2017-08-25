@@ -23,7 +23,7 @@ class MultiLineString extends Geometry
     public function __construct(array $lineStrings)
     {
         $this->coordinates = array_map(
-            function($lineString) {
+            function ($lineString) {
                 if ( ! $lineString instanceof LineString) {
                     $lineString = new LineString($lineString);
                 }

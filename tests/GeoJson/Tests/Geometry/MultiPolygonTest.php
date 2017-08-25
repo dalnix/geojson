@@ -14,10 +14,12 @@ class MultiPolygonTest extends BaseGeoJsonTest
         $class = new \ReflectionClass('GeoJson\Geometry\MultiPolygon');
 
         return $class->newInstanceArgs(array_merge(
-            array(array(
-                array(array(array(0, 0), array(0, 4), array(4, 4), array(4, 0), array(0, 0))),
-                array(array(array(1, 1), array(1, 3), array(3, 3), array(3, 1), array(1, 1))),
-            )),
+            array(
+                array(
+                    array(array(array(0, 0), array(0, 4), array(4, 4), array(4, 0), array(0, 0))),
+                    array(array(array(1, 1), array(1, 3), array(3, 3), array(3, 1), array(1, 1))),
+                )
+            ),
             $extraArgs
         ));
     }
@@ -52,7 +54,7 @@ class MultiPolygonTest extends BaseGeoJsonTest
         $multiPolygon = new MultiPolygon($coordinates);
 
         $expected = array(
-            'type' => 'MultiPolygon',
+            'type'        => 'MultiPolygon',
             'coordinates' => $coordinates,
         );
 
@@ -77,7 +79,7 @@ class MultiPolygonTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json = json_decode($json, $assoc);
+        $json         = json_decode($json, $assoc);
         $multiPolygon = GeoJson::jsonUnserialize($json);
 
         $expectedCoordinates = array(
@@ -93,7 +95,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true' => array(true),
+            'assoc=true'  => array(true),
             'assoc=false' => array(false),
         );
     }

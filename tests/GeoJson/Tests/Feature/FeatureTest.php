@@ -25,19 +25,19 @@ class FeatureTest extends BaseGeoJsonTest
         $geometry = $this->getMockGeometry();
 
         $geometry->expects($this->any())
-            ->method('jsonSerialize')
-            ->will($this->returnValue('geometry'));
+                 ->method('jsonSerialize')
+                 ->will($this->returnValue('geometry'));
 
         $properties = array('key' => 'value');
-        $id = 'identifier';
+        $id         = 'identifier';
 
         $feature = new Feature($geometry, $properties, $id);
 
         $expected = array(
-            'type' => 'Feature',
-            'geometry' => 'geometry',
+            'type'       => 'Feature',
+            'geometry'   => 'geometry',
             'properties' => $properties,
-            'id' => 'identifier',
+            'id'         => 'identifier',
         );
 
         $this->assertSame('Feature', $feature->getType());
@@ -52,8 +52,8 @@ class FeatureTest extends BaseGeoJsonTest
         $feature = new Feature();
 
         $expected = array(
-            'type' => 'Feature',
-            'geometry' => null,
+            'type'       => 'Feature',
+            'geometry'   => null,
             'properties' => null,
         );
 
@@ -65,8 +65,8 @@ class FeatureTest extends BaseGeoJsonTest
         $feature = new Feature(null, array());
 
         $expected = array(
-            'type' => 'Feature',
-            'geometry' => null,
+            'type'       => 'Feature',
+            'geometry'   => null,
             'properties' => new \stdClass(),
         );
 
@@ -93,7 +93,7 @@ class FeatureTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json = json_decode($json, $assoc);
+        $json    = json_decode($json, $assoc);
         $feature = GeoJson::jsonUnserialize($json);
 
         $this->assertInstanceOf('GeoJson\Feature\Feature', $feature);
@@ -111,7 +111,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true' => array(true),
+            'assoc=true'  => array(true),
             'assoc=false' => array(false),
         );
     }

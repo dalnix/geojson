@@ -63,10 +63,10 @@ class LinearRingTest extends BaseGeoJsonTest
     public function testSerialization()
     {
         $coordinates = array(array(1, 1), array(2, 2), array(3, 3), array(1, 1));
-        $linearRing = new LinearRing($coordinates);
+        $linearRing  = new LinearRing($coordinates);
 
         $expected = array(
-            'type' => 'LineString',
+            'type'        => 'LineString',
             'coordinates' => $coordinates,
         );
 

@@ -20,7 +20,7 @@ class LinkedTest extends \PHPUnit_Framework_TestCase
         $crs = new Linked('http://example.com/crs/42', 'proj4');
 
         $expected = array(
-            'type' => 'link',
+            'type'       => 'link',
             'properties' => array(
                 'href' => 'http://example.com/crs/42',
                 'type' => 'proj4',
@@ -37,7 +37,7 @@ class LinkedTest extends \PHPUnit_Framework_TestCase
         $crs = new Linked('http://example.com/crs/42');
 
         $expected = array(
-            'type' => 'link',
+            'type'       => 'link',
             'properties' => array(
                 'href' => 'http://example.com/crs/42',
             ),
@@ -63,7 +63,7 @@ class LinkedTest extends \PHPUnit_Framework_TestCase
 JSON;
 
         $json = json_decode($json, $assoc);
-        $crs = CoordinateReferenceSystem::jsonUnserialize($json);
+        $crs  = CoordinateReferenceSystem::jsonUnserialize($json);
 
         $expectedProperties = array(
             'href' => 'http://example.com/crs/42',
@@ -91,7 +91,7 @@ JSON;
 JSON;
 
         $json = json_decode($json, $assoc);
-        $crs = CoordinateReferenceSystem::jsonUnserialize($json);
+        $crs  = CoordinateReferenceSystem::jsonUnserialize($json);
 
         $expectedProperties = array('href' => 'http://example.com/crs/42');
 
@@ -103,7 +103,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true' => array(true),
+            'assoc=true'  => array(true),
             'assoc=false' => array(false),
         );
     }

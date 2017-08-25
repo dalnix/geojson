@@ -44,7 +44,7 @@ class PointTest extends BaseGeoJsonTest
         return array(
             'strings' => array('1.0', '2'),
             'objects' => array(new \stdClass(), new \stdClass()),
-            'arrays' => array(array(), array()),
+            'arrays'  => array(array(), array()),
         );
     }
 
@@ -58,10 +58,10 @@ class PointTest extends BaseGeoJsonTest
     public function testSerialization()
     {
         $coordinates = array(1, 1);
-        $point = new Point($coordinates);
+        $point       = new Point($coordinates);
 
         $expected = array(
-            'type' => 'Point',
+            'type'        => 'Point',
             'coordinates' => $coordinates,
         );
 
@@ -83,7 +83,7 @@ class PointTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json = json_decode($json, $assoc);
+        $json  = json_decode($json, $assoc);
         $point = GeoJson::jsonUnserialize($json);
 
         $this->assertInstanceOf('GeoJson\Geometry\Point', $point);
@@ -94,7 +94,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true' => array(true),
+            'assoc=true'  => array(true),
             'assoc=false' => array(false),
         );
     }

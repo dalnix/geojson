@@ -35,10 +35,10 @@ class LineStringTest extends BaseGeoJsonTest
     public function testSerialization()
     {
         $coordinates = array(array(1, 1), array(2, 2));
-        $lineString = new LineString($coordinates);
+        $lineString  = new LineString($coordinates);
 
         $expected = array(
-            'type' => 'LineString',
+            'type'        => 'LineString',
             'coordinates' => $coordinates,
         );
 
@@ -63,7 +63,7 @@ class LineStringTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json = json_decode($json, $assoc);
+        $json       = json_decode($json, $assoc);
         $lineString = GeoJson::jsonUnserialize($json);
 
         $expectedCoordinates = array(array(1, 1), array(2, 2));
@@ -76,7 +76,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true' => array(true),
+            'assoc=true'  => array(true),
             'assoc=false' => array(false),
         );
     }

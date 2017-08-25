@@ -25,10 +25,10 @@ class LinearRing extends LineString
             throw new \InvalidArgumentException('LinearRing requires at least four positions');
         }
 
-        $lastPosition = end($positions);
+        $lastPosition  = end($positions);
         $firstPosition = reset($positions);
 
-        $lastPosition = $lastPosition instanceof Point ? $lastPosition->getCoordinates() : $lastPosition;
+        $lastPosition  = $lastPosition instanceof Point ? $lastPosition->getCoordinates() : $lastPosition;
         $firstPosition = $firstPosition instanceof Point ? $firstPosition->getCoordinates() : $firstPosition;
 
         if ($lastPosition !== $firstPosition) {
