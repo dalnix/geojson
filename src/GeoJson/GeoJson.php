@@ -189,4 +189,8 @@ abstract class GeoJson implements \JsonSerializable, JsonUnserializable
             }
         }
     }
+
+    public function toJson(){
+        return json_encode($this);
+    }
 }

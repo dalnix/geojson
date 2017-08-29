@@ -38,6 +38,33 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
         if (func_num_args() > 1) {
             $this->setOptionalConstructorArgs(array_slice(func_get_args(), 1));
         }
+        return $this;
+    }
+
+    /**
+     * @param Feature $feature
+     *
+     * @return $this
+     */
+    public function addFeature(Feature $feature)
+    {
+
+        echo count($this->features);
+        $this->features[] = $feature;
+        echo count($this->features);
+
+        return $this;
+    }
+
+    /**
+     * @param int $index
+     *
+     * @return $this
+     */
+    public function removeFeatureAt(int $index)
+    {
+        array_splice($this->features, $index, 1);
+        return $this;
     }
 
     /**
@@ -78,5 +105,9 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
                 $this->features
             ))
         );
+    }
+
+    public function __toString(){
+        return json_encode($this);
     }
 }
