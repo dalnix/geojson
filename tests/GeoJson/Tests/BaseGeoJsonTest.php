@@ -63,28 +63,28 @@ abstract class BaseGeoJsonTest extends \PHPUnit_Framework_TestCase
     protected function getMockBoundingBox()
     {
         return $this->getMockBuilder('GeoJson\BoundingBox')
-                    ->disableOriginalConstructor()
-                    ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     protected function getMockCoordinateReferenceSystem()
     {
         return $this->getMockBuilder('GeoJson\CoordinateReferenceSystem\CoordinateReferenceSystem')
-                    ->disableOriginalConstructor()
-                    ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     protected function getMockFeature()
     {
         return $this->getMockBuilder('GeoJson\Feature\Feature')
-                    ->disableOriginalConstructor()
-                    ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     protected function getMockGeometry()
     {
         return $this->getMockBuilder('GeoJson\Geometry\Geometry')
-                    ->disableOriginalConstructor()
-                    ->getMock();
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

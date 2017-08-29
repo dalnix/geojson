@@ -30,7 +30,7 @@ class GeoJsonTest extends \PHPUnit_Framework_TestCase
 }
 JSON;
 
-        $json  = json_decode($json, $assoc);
+        $json = json_decode($json, $assoc);
         $point = GeoJson::jsonUnserialize($json);
 
         $this->assertInstanceOf('GeoJson\Geometry\Point', $point);
@@ -62,7 +62,7 @@ JSON;
 }
 JSON;
 
-        $json  = json_decode($json, $assoc);
+        $json = json_decode($json, $assoc);
         $point = GeoJson::jsonUnserialize($json);
 
         $this->assertInstanceOf('GeoJson\Geometry\Point', $point);
@@ -81,7 +81,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true'  => array(true),
+            'assoc=true' => array(true),
             'assoc=false' => array(false),
         );
     }

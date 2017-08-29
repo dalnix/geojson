@@ -2,6 +2,4 @@
 
 namespace GeoJson\Exception;
 
-interface Exception
-{
-}
+interface Exception {}

@@ -77,17 +77,17 @@ class GeometryCollectionTest extends BaseGeoJsonTest
         );
 
         $geometries[0]->expects($this->any())
-                      ->method('jsonSerialize')
-                      ->will($this->returnValue('geometry1'));
+            ->method('jsonSerialize')
+            ->will($this->returnValue('geometry1'));
 
         $geometries[1]->expects($this->any())
-                      ->method('jsonSerialize')
-                      ->will($this->returnValue('geometry2'));
+            ->method('jsonSerialize')
+            ->will($this->returnValue('geometry2'));
 
         $collection = new GeometryCollection($geometries);
 
         $expected = array(
-            'type'       => 'GeometryCollection',
+            'type' => 'GeometryCollection',
             'geometries' => array('geometry1', 'geometry2'),
         );
 
@@ -114,7 +114,7 @@ class GeometryCollectionTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json       = json_decode($json, $assoc);
+        $json = json_decode($json, $assoc);
         $collection = GeoJson::jsonUnserialize($json);
 
         $this->assertInstanceOf('GeoJson\Geometry\GeometryCollection', $collection);
@@ -122,7 +122,7 @@ JSON;
         $this->assertCount(1, $collection);
 
         $geometries = iterator_to_array($collection);
-        $geometry   = $geometries[0];
+        $geometry = $geometries[0];
 
         $this->assertInstanceOf('GeoJson\Geometry\Point', $geometry);
         $this->assertSame('Point', $geometry->getType());
@@ -132,7 +132,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true'  => array(true),
+            'assoc=true' => array(true),
             'assoc=false' => array(false),
         );
     }

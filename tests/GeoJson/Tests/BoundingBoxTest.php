@@ -49,7 +49,7 @@ class BoundingBoxTest extends \PHPUnit_Framework_TestCase
         return array(
             'strings' => array('0', '0.0', '1', '1.0'),
             'objects' => array(new \stdClass(), new \stdClass(), new \stdClass(), new \stdClass()),
-            'arrays'  => array(array(), array(), array(), array()),
+            'arrays' => array(array(), array(), array(), array()),
         );
     }
 
@@ -64,7 +64,7 @@ class BoundingBoxTest extends \PHPUnit_Framework_TestCase
 
     public function testSerialization()
     {
-        $bounds      = array(-180.0, -90.0, 0.0, 180.0, 90.0, 100.0);
+        $bounds = array(-180.0, -90.0, 0.0, 180.0, 90.0, 100.0);
         $boundingBox = new BoundingBox($bounds);
 
         $this->assertSame($bounds, $boundingBox->getBounds());
@@ -79,7 +79,7 @@ class BoundingBoxTest extends \PHPUnit_Framework_TestCase
     {
         $json = '[-180.0, -90.0, 180.0, 90.0]';
 
-        $json        = json_decode($json, $assoc);
+        $json = json_decode($json, $assoc);
         $boundingBox = BoundingBox::jsonUnserialize($json);
 
         $this->assertInstanceOf('GeoJson\BoundingBox', $boundingBox);
@@ -89,7 +89,7 @@ class BoundingBoxTest extends \PHPUnit_Framework_TestCase
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true'  => array(true),
+            'assoc=true' => array(true),
             'assoc=false' => array(false),
         );
     }

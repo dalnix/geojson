@@ -14,12 +14,10 @@ class MultiLineStringTest extends BaseGeoJsonTest
         $class = new \ReflectionClass('GeoJson\Geometry\MultiLineString');
 
         return $class->newInstanceArgs(array_merge(
-            array(
-                array(
-                    array(array(1, 1), array(2, 2)),
-                    array(array(3, 3), array(4, 4)),
-                )
-            ),
+            array(array(
+                array(array(1, 1), array(2, 2)),
+                array(array(3, 3), array(4, 4)),
+            )),
             $extraArgs
         ));
     }
@@ -54,7 +52,7 @@ class MultiLineStringTest extends BaseGeoJsonTest
         $multiLineString = new MultiLineString($coordinates);
 
         $expected = array(
-            'type'        => 'MultiLineString',
+            'type' => 'MultiLineString',
             'coordinates' => $coordinates,
         );
 
@@ -79,7 +77,7 @@ class MultiLineStringTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json            = json_decode($json, $assoc);
+        $json = json_decode($json, $assoc);
         $multiLineString = GeoJson::jsonUnserialize($json);
 
         $expectedCoordinates = array(
@@ -95,7 +93,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true'  => array(true),
+            'assoc=true' => array(true),
             'assoc=false' => array(false),
         );
     }

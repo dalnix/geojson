@@ -23,7 +23,7 @@ class MultiPolygon extends Geometry
     public function __construct(array $polygons)
     {
         $this->coordinates = array_map(
-            function ($polygon) {
+            function($polygon) {
                 if ( ! $polygon instanceof Polygon) {
                     $polygon = new Polygon($polygon);
                 }

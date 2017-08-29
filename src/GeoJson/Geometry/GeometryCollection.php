@@ -71,14 +71,10 @@ class GeometryCollection extends Geometry implements \Countable, \IteratorAggreg
     {
         return array_merge(
             parent::jsonSerialize(),
-            array(
-                'geometries' => array_map(
-                    function (Geometry $geometry) {
-                        return $geometry->jsonSerialize();
-                    },
-                    $this->geometries
-                )
-            )
+            array('geometries' => array_map(
+                function(Geometry $geometry) { return $geometry->jsonSerialize(); },
+                $this->geometries
+            ))
         );
     }
 }

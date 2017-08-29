@@ -20,7 +20,7 @@ class NamedTest extends \PHPUnit_Framework_TestCase
         $crs = new Named('urn:ogc:def:crs:OGC:1.3:CRS84');
 
         $expected = array(
-            'type'       => 'name',
+            'type' => 'name',
             'properties' => array(
                 'name' => 'urn:ogc:def:crs:OGC:1.3:CRS84'
             ),
@@ -47,7 +47,7 @@ class NamedTest extends \PHPUnit_Framework_TestCase
 JSON;
 
         $json = json_decode($json, $assoc);
-        $crs  = CoordinateReferenceSystem::jsonUnserialize($json);
+        $crs = CoordinateReferenceSystem::jsonUnserialize($json);
 
         $expectedProperties = array('name' => 'urn:ogc:def:crs:OGC:1.3:CRS84');
 
@@ -59,7 +59,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true'  => array(true),
+            'assoc=true' => array(true),
             'assoc=false' => array(false),
         );
     }

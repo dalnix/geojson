@@ -14,12 +14,10 @@ class PolygonTest extends BaseGeoJsonTest
         $class = new \ReflectionClass('GeoJson\Geometry\Polygon');
 
         return $class->newInstanceArgs(array_merge(
-            array(
-                array(
-                    array(array(0, 0), array(0, 4), array(4, 4), array(4, 0), array(0, 0)),
-                    array(array(1, 1), array(1, 3), array(3, 3), array(3, 1), array(1, 1)),
-                )
-            ),
+            array(array(
+                array(array(0, 0), array(0, 4), array(4, 4), array(4, 0), array(0, 0)),
+                array(array(1, 1), array(1, 3), array(3, 3), array(3, 1), array(1, 1)),
+            )),
             $extraArgs
         ));
     }
@@ -54,7 +52,7 @@ class PolygonTest extends BaseGeoJsonTest
         $polygon = new Polygon($coordinates);
 
         $expected = array(
-            'type'        => 'Polygon',
+            'type' => 'Polygon',
             'coordinates' => $coordinates,
         );
 
@@ -79,7 +77,7 @@ class PolygonTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json    = json_decode($json, $assoc);
+        $json = json_decode($json, $assoc);
         $polygon = GeoJson::jsonUnserialize($json);
 
         $expectedCoordinates = array(
@@ -95,7 +93,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true'  => array(true),
+            'assoc=true' => array(true),
             'assoc=false' => array(false),
         );
     }

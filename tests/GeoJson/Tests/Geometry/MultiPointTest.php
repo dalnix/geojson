@@ -14,12 +14,10 @@ class MultiPointTest extends BaseGeoJsonTest
         $class = new \ReflectionClass('GeoJson\Geometry\MultiPoint');
 
         return $class->newInstanceArgs(array_merge(
-            array(
-                array(
-                    array(1, 1),
-                    array(2, 2),
-                )
-            ),
+            array(array(
+                array(1, 1),
+                array(2, 2),
+            )),
             $extraArgs
         ));
     }
@@ -47,10 +45,10 @@ class MultiPointTest extends BaseGeoJsonTest
     public function testSerialization()
     {
         $coordinates = array(array(1, 1), array(2, 2));
-        $multiPoint  = new MultiPoint($coordinates);
+        $multiPoint = new MultiPoint($coordinates);
 
         $expected = array(
-            'type'        => 'MultiPoint',
+            'type' => 'MultiPoint',
             'coordinates' => $coordinates,
         );
 
@@ -75,7 +73,7 @@ class MultiPointTest extends BaseGeoJsonTest
 }
 JSON;
 
-        $json       = json_decode($json, $assoc);
+        $json = json_decode($json, $assoc);
         $multiPoint = GeoJson::jsonUnserialize($json);
 
         $expectedCoordinates = array(array(1, 1), array(2, 2));
@@ -88,7 +86,7 @@ JSON;
     public function provideJsonDecodeAssocOptions()
     {
         return array(
-            'assoc=true'  => array(true),
+            'assoc=true' => array(true),
             'assoc=false' => array(false),
         );
     }

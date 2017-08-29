@@ -49,7 +49,7 @@ abstract class CoordinateReferenceSystem implements \JsonSerializable, JsonUnser
     public function jsonSerialize()
     {
         return array(
-            'type'       => $this->type,
+            'type' => $this->type,
             'properties' => $this->properties,
         );
     }
@@ -57,9 +57,11 @@ abstract class CoordinateReferenceSystem implements \JsonSerializable, JsonUnser
     /**
      * @see JsonUnserializable::jsonUnserialize()
      */
-    final public static function jsonUnserialize(string $json)
+    final public static function jsonUnserialize($json)
     {
-        $json = json_decode($json);
+        if ( ! is_array($json) && ! is_object($json)) {
+            throw UnserializationException::invalidValue('CRS', $json, 'array or object');
+        }
 
         $json = new \ArrayObject($json);
 
@@ -71,7 +73,7 @@ abstract class CoordinateReferenceSystem implements \JsonSerializable, JsonUnser
             throw UnserializationException::missingProperty('CRS', 'properties', 'array or object');
         }
 
-        $type       = (string)$json['type'];
+        $type = (string) $json['type'];
         $properties = $json['properties'];
 
         switch ($type) {
@@ -91,9 +93,7 @@ abstract class CoordinateReferenceSystem implements \JsonSerializable, JsonUnser
      * This method must be overridden in a child class.
      *
      * @see CoordinateReferenceSystem::jsonUnserialize()
-     *
      * @param array|object $properties
-     *
      * @return CoordinateReferenceSystem
      * @throws \BadMethodCallException
      */
