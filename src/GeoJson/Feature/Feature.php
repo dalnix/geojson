@@ -13,6 +13,7 @@ use GeoJson\Geometry\Geometry;
  */
 class Feature extends GeoJson
 {
+
     protected $type = 'Feature';
 
     /**
@@ -82,6 +83,8 @@ class Feature extends GeoJson
     }
 
     /**
+     * Replace properties of Feature with an array.
+     *
      * @param array $properties
      *
      * @return $this
@@ -89,27 +92,36 @@ class Feature extends GeoJson
     public function setProperties(array $properties)
     {
         $this->properties = $properties;
+
         return $this;
     }
 
     /**
+     * Add an array of properties to Feature.
+     *
      * @param array $properties
      *
      * @return $this
      */
-    public function addProperties(array $properties){
+    public function addProperties(array $properties)
+    {
         $this->properties = array_merge($this->properties, $properties);
+
         return $this;
     }
 
     /**
+     * Add a single property to Feature.
+     *
      * @param $key
      * @param $value
      *
      * @return $this
      */
-    public function addProperty($key, $value){
+    public function addProperty($key, $value)
+    {
         $this->properties[$key] = $value;
+
         return $this;
     }
 
