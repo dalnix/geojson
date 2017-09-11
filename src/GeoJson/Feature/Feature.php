@@ -42,9 +42,9 @@ class Feature extends GeoJson
      */
     public function __construct(Geometry $geometry = null, array $properties = null, $id = null)
     {
-        $this->geometry = $geometry;
+        $this->geometry   = $geometry;
         $this->properties = $properties;
-        $this->id = $id;
+        $this->id         = $id;
 
         if (func_num_args() > 3) {
             $this->setOptionalConstructorArgs(array_slice(func_get_args(), 3));
@@ -82,13 +82,46 @@ class Feature extends GeoJson
     }
 
     /**
+     * @param array $properties
+     *
+     * @return $this
+     */
+    public function setProperties(array $properties)
+    {
+        $this->properties = $properties;
+        return $this;
+    }
+
+    /**
+     * @param array $properties
+     *
+     * @return $this
+     */
+    public function addProperties(array $properties){
+        $this->properties = array_merge($this->properties, $properties);
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return $this
+     */
+    public function addProperty($key, $value){
+        $this->properties[$key] = $value;
+        return $this;
+    }
+
+
+    /**
      * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
      */
     public function jsonSerialize()
     {
         $json = parent::jsonSerialize();
 
-        $json['geometry'] = isset($this->geometry) ? $this->geometry->jsonSerialize() : null;
+        $json['geometry']   = isset($this->geometry) ? $this->geometry->jsonSerialize() : null;
         $json['properties'] = isset($this->properties) ? $this->properties : null;
 
         // Ensure empty associative arrays are encoded as JSON objects
