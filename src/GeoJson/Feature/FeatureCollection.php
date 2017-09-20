@@ -79,9 +79,25 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
      *
      * @return Feature[]
      */
-    public function getFeatures()
+    public function getFeatures($selection = [])
     {
-        return $this->features;
+        if ($selection) {
+            $features = [];
+            foreach ($selection as $key => $val) {
+                foreach($this->features as $feature) {
+                    $properties = $feature->getProperties();
+
+                    if (array_intersect($selection, $properties)) {
+                        $features[] = $feature;
+                    }
+                }
+            }
+        } else {
+            $features = $this->features;
+        }
+
+        dd($features);
+        return $features;
     }
 
     /**
