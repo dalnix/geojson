@@ -3,10 +3,13 @@
     "type": "library",
     "description": "GeoJSON implementation for PHP",
     "keywords": ["geo", "geospatial", "geojson"],
-    "homepage": "https://github.com/jmikola/geojson",
+    "homepage": "https://github.com/dalnix/geojson",
     "license": "MIT",
+    "version": "dev-master",
     "authors": [
-        { "name": "Jeremy Mikola", "email": "jmikola@gmail.com" }
+        { "name": "Jeremy Mikola", "email": "jmikola@gmail.com" },
+        { "name": "Emil Österlund", "email": "emil@dalnix.se" },
+        { "name": "Olle Gustafsson", "email": "olle@dalnix.se" }
     ],
     "require": {
         "php": ">=5.3.3"
