@@ -12,6 +12,7 @@ use GeoJson\GeoJson;
  */
 abstract class Geometry extends GeoJson
 {
+
     /**
      * @var array
      */
@@ -40,4 +41,38 @@ abstract class Geometry extends GeoJson
 
         return $json;
     }
+
+    /**
+     * Get center coordinates of Geometry
+     *
+     * @return Point
+     */
+    public function getCenter()
+    {
+        $coordinates = $this->getCoordinates()[0];
+
+        $max_lat = $min_lat = $coordinates[0][1];
+        $max_lon = $min_lon = $coordinates[0][0];
+
+        foreach ($coordinates as $coordinate) {
+            if ($coordinate[1] > $max_lat) {
+                $max_lat = $coordinate[1];
+            }
+            if ($coordinate[1] < $min_lat) {
+                $min_lat = $coordinate[1];
+            }
+            if ($coordinate[0] > $max_lon) {
+                $max_lon = $coordinate[0];
+            }
+            if ($coordinate[0] < $min_lon) {
+                $min_lon = $coordinate[0];
+            }
+        }
+
+        $lon = ($min_lon + $max_lon) / 2;
+        $lat = ($min_lat + $max_lat) / 2;
+
+        return new Point([$lon, $lat]);
+    }
+
 }
