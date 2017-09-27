@@ -12,6 +12,7 @@ use GeoJson\GeoJson;
  */
 class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregate
 {
+
     protected $type = 'FeatureCollection';
 
     /**
@@ -49,7 +50,6 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
      */
     public function addFeature(Feature $feature)
     {
-
         $this->features[] = $feature;
 
         return $this;
@@ -63,6 +63,7 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
     public function removeFeatureAt(int $index)
     {
         array_splice($this->features, $index, 1);
+
         return $this;
     }
 
@@ -75,20 +76,29 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
     }
 
     /**
-     * Return the Feature objects in this collection.
+     * Return the Feature objects in this collection with optional filter.
      *
-     * @return Feature[]
+     * @param array $filter
+     *
+     * @return array
      */
-    public function getFeatures($selection = [])
+    public function getFeatures($filter = [])
     {
-        if ($selection) {
+        if ($filter) {
             $features = [];
-            foreach ($selection as $key => $val) {
-                foreach($this->features as $feature) {
-                    $properties = $feature->getProperties();
+            foreach ($filter as $key => $val) {
+                if (is_array($val)) {
+                    // @todo
+                } else {
+                    foreach ($this->features as $feature) {
+                        $properties = $feature->getProperties();
 
-                    if (array_intersect($selection, $properties)) {
-                        $features[] = $feature;
+                        if (count(array_intersect($properties, $filter)) == count($filter)) {
+                            if ( ! in_array($feature, $features)) {
+                                $features[] = $feature;
+                            }
+                        }
+
                     }
                 }
             }
@@ -96,9 +106,77 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
             $features = $this->features;
         }
 
-        dd($features);
         return $features;
     }
+
+
+    /**
+     * $objects = [
+     * [
+     * 'type' => 'point',
+     * 'color' => '#555555',
+     * 'status' => 'done'
+     *
+     * ],
+     * [
+     * 'type' => 'point',
+     * 'color' => '#111111',
+     * ],
+     * [
+     * 'type' => 'area',
+     * 'color' => '#555555',
+     * ],
+     * [
+     * 'type' => 'area',
+     * 'color' => '#111111',
+     * 'status' => 'done'
+     * ]
+     * ];
+     * */
+
+    public function is_multi($a)
+    {
+        $rv = array_filter($a, 'is_array');
+        if (count($rv) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function dalnixFilter($array, $filters, $resultingObjects = [])
+    {
+        foreach ($filters as $key => $filter) {
+            if ( ! $this->is_multi($filters)) {
+                foreach ($array as $object) {
+                    $result = array_intersect($object, $filters);
+                    if (count($result) == count($filters)) {
+                        if ( ! in_array($object, $resultingObjects)) {
+                            array_push($resultingObjects, $object);
+                        }
+                    }
+                }
+            } else {
+                if ( ! is_array($filter)) {
+                    continue;
+                }
+                foreach ($filter as $property) {
+                    $newFilters       = $filters;
+                    $newFilters[$key] = $property;
+
+                    $newObjects = $this->dalnixFilter($array, $newFilters, $resultingObjects);
+                    foreach ($newObjects as $newObject) {
+                        if ( ! in_array($newObject, $resultingObjects)) {
+                            array_push($resultingObjects, $newObject);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $resultingObjects;
+    }
+
 
     /**
      * @see http://php.net/manual/en/iteratoraggregate.getiterator.php
@@ -115,14 +193,19 @@ class FeatureCollection extends GeoJson implements \Countable, \IteratorAggregat
     {
         return array_merge(
             parent::jsonSerialize(),
-            array('features' => array_map(
-                function(Feature $feature) { return $feature->jsonSerialize(); },
-                $this->features
-            ))
+            array(
+                'features' => array_map(
+                    function (Feature $feature) {
+                        return $feature->jsonSerialize();
+                    },
+                    $this->features
+                )
+            )
         );
     }
 
-    public function __toString(){
+    public function __toString()
+    {
         return json_encode($this);
     }
 }
