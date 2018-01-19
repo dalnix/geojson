@@ -6,10 +6,12 @@
     "homepage": "https://github.com/jmikola/geojson",
     "license": "MIT",
     "authors": [
-        { "name": "Jeremy Mikola", "email": "jmikola@gmail.com" }
+        { "name": "Jeremy Mikola", "email": "jmikola@gmail.com" },
+        { "name": "Emil Österlund", "email": "emil@dalnix.se" },
+        { "name": "Olle Gustafsson", "email": "olle@dalnix.se" }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=7.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~3.7"
